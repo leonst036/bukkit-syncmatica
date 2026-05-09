@@ -19,14 +19,14 @@ public class SyncmaticaUtil {
     private SyncmaticaUtil() {
     }
 
-    // 取自堆栈溢出
+    // Entnommen von Stack Overflow
     static {
         Arrays.sort(ILLEGAL_CHARS);
     }
 
     public static UUID createChecksum(final InputStream fis) throws NoSuchAlgorithmException, IOException {
-        // 源堆栈溢出
-        byte[] buffer = new byte[4096]; // 4096是最常见的集群大小
+        // Quelle: Stack Overflow
+        byte[] buffer = new byte[4096]; // 4096 ist die häufigste Clustergröße
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         int numRead;
         do {
@@ -47,7 +47,7 @@ public class SyncmaticaUtil {
             int c = badFileName.codePointAt(i);
             if (Arrays.binarySearch(ILLEGAL_CHARS, c) < 0) {
                 sanitized.appendCodePoint(c);
-                if (sanitized.length() == 255) { // 确保长度保持在255以下
+                if (sanitized.length() == 255) { // Stellt sicher, dass die Länge unter 255 bleibt
                     break;
                 }
             }
@@ -62,7 +62,7 @@ public class SyncmaticaUtil {
             return;
         }
         if (overwrite(backup, current, 2) && !overwrite(current, incoming, 4)) {
-            overwrite(current, backup, 8); // 恢复备份
+            overwrite(current, backup, 8); // Backup wiederherstellen
         }
     }
 
@@ -75,7 +75,7 @@ public class SyncmaticaUtil {
             Files.move(current, backup);
         } catch (IOException exception) {
             if (tries <= 0) {
-                LogManager.getLogger(SyncmaticaUtil.class).error("Excessive retries when trying to write Syncmatica placement", exception);
+                LogManager.getLogger(SyncmaticaUtil.class).error("Zu viele Wiederholungsversuche beim Schreiben der Syncmatica-Platzierung", exception);
                 return false;
             }
             return overwrite(backup, current, tries - 1);

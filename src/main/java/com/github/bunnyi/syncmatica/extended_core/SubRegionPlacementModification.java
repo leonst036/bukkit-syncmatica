@@ -8,10 +8,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 public class SubRegionPlacementModification {
-    public final String name;               // 子区域名称
-    public final BlockPos position;         // 子区域位置
-    public final BlockRotation rotation;    // 子区域旋转
-    public final BlockMirror mirror;        // 子区域镜像
+    public final String name;               // Name des Unterbereichs
+    public final BlockPos position;         // Position des Unterbereichs
+    public final BlockRotation rotation;    // Rotation des Unterbereichs
+    public final BlockMirror mirror;        // Spiegelung des Unterbereichs
 
     SubRegionPlacementModification(String name, BlockPos position, BlockRotation rotation, BlockMirror mirror) {
         this.name = name;

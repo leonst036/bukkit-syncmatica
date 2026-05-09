@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public class PlayerIdentifier {
     public static final UUID MISSING_PLAYER_UUID = UUID.fromString("4c1b738f-56fa-4011-8273-498c972424ea");
-    public static final PlayerIdentifier MISSING_PLAYER = new PlayerIdentifier(MISSING_PLAYER_UUID, "No Player");
+    public static final PlayerIdentifier MISSING_PLAYER = new PlayerIdentifier(MISSING_PLAYER_UUID, "Kein Spieler");
 
-    public final UUID uuid;     // 玩家UUID
-    private String name;        // 玩家名称
+    public final UUID uuid;     // Spieler-UUID
+    private String name;        // Spielername
 
     PlayerIdentifier(final UUID uuid, final String bufferedPlayerName) {
         this.uuid = uuid;

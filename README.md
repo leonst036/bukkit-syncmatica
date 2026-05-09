@@ -1,12 +1,14 @@
 # bukkit-syncmatica
-这是一个bukkit服务端插件，为fabric-syncmatica协议兼容
+Dies ist ein Bukkit-Server-Plugin zur Kompatibilität mit dem fabric-syncmatica-Protokoll.
 
-## 注意
+## Hinweis
 
-目前在原作者的syncmatica中，没有对插件通道进行注册
+Im ursprünglichen Syncmatica des Originalautors ist der Plugin-Kanal nicht registriert.
 
-所以导致与服务端无法进行通讯，所以请使用我的分支版本：https://github.com/Bunnui/fabric-syncmatica
+Dadurch kann keine Kommunikation mit dem Server stattfinden. Bitte verwende deshalb meinen Fork:
+https://github.com/Bunnui/fabric-syncmatica
 
-因为 mod 协议上的缺陷，暂时无法办法提供更好的共享管理，这只是与 mod 协议上兼容，仅限于我的分支修复插件通道通讯版本。
+Wegen Einschränkungen im Mod-Protokoll kann derzeit keine bessere Verwaltung des Teilens angeboten werden.
+Dieses Plugin stellt primär die Protokoll-Kompatibilität bereit und ist auf meinen Fork mit behobener Plugin-Kanal-Kommunikation ausgelegt.
 
-目前可以正常操作，但是否还有bug还得测试反馈。
+Der Betrieb funktioniert aktuell, mögliche Fehler müssen jedoch weiterhin getestet und gemeldet werden.

@@ -52,7 +52,7 @@ public class PacketByteBuf {
                     newLength = Math.max(length, max);
                 }
                 byte[] newBuffer = new byte[writeIndex + newLength];
-                // 缓冲区有数据才有拷贝的意义
+                // Kopieren ist nur sinnvoll, wenn der Puffer Daten enthält
                 if (this.buffer.length > 0 || writeIndex == 0) {
                     System.arraycopy(this.buffer, 0, newBuffer, 0, buffer.length);
                 }
@@ -186,7 +186,7 @@ public class PacketByteBuf {
             b = readByte();
             i |= (b & 0x7F) << j++ * 7;
             if (j <= 5) continue;
-            throw new RuntimeException("VarInt too big");
+            throw new RuntimeException("VarInt ist zu groß");
         } while ((b & 0x80) == 128);
         return i;
     }
@@ -210,7 +210,7 @@ public class PacketByteBuf {
             b = readByte();
             l |= (long)(b & 0x7F) << i++ * 7;
             if (i <= 10) continue;
-            throw new RuntimeException("VarLong too big");
+            throw new RuntimeException("VarLong ist zu groß");
         } while ((b & 0x80) == 128);
         return l;
     }
@@ -243,14 +243,14 @@ public class PacketByteBuf {
         int encodedLength = toEncodedStringLength(maxLength);
         int byteLength = readVarInt();
         if (byteLength > encodedLength) {
-            throw new DecoderException("The received encoded string buffer length is longer than maximum allowed (" + byteLength + " > " + encodedLength + ")");
+            throw new DecoderException("Die empfangene codierte String-Pufferlänge ist größer als erlaubt (" + byteLength + " > " + encodedLength + ")");
         } else if (byteLength < 0) {
-            throw new DecoderException("The received encoded string buffer length is less than zero! Weird string!");
+            throw new DecoderException("Die empfangene codierte String-Pufferlänge ist kleiner als null! Ungültiger String!");
         } else {
             String string = new String(readBytes(byteLength), StandardCharsets.UTF_8);
             if (string.length() > maxLength) {
                 int var10002 = string.length();
-                throw new DecoderException("The received string length is longer than maximum allowed (" + var10002 + " > " + maxLength + ")");
+                throw new DecoderException("Die empfangene String-Länge ist größer als erlaubt (" + var10002 + " > " + maxLength + ")");
             } else {
                 return string;
             }
@@ -264,12 +264,12 @@ public class PacketByteBuf {
     public PacketByteBuf writeString(String string, int maxLength) {
         if (string.length() > maxLength) {
             int length = string.length();
-            throw new EncoderException("String too big (was " + length + " characters, max " + maxLength + ")");
+            throw new EncoderException("String ist zu groß (hat " + length + " Zeichen, maximal " + maxLength + ")");
         } else {
             byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
             int encodedLength = toEncodedStringLength(maxLength);
             if (bytes.length > encodedLength) {
-                throw new EncoderException("String too big (was " + bytes.length + " bytes encoded, max " + encodedLength + ")");
+                throw new EncoderException("String ist zu groß (hat " + bytes.length + " Bytes codiert, maximal " + encodedLength + ")");
             } else {
                 writeVarInt(bytes.length);
                 writeBytes(bytes);
@@ -304,4 +304,3 @@ public class PacketByteBuf {
 
     }
 }
-

@@ -33,7 +33,7 @@ public class FileStorage {
 
     private boolean isDownloading(ServerPlacement placement) {
         if (context == null) {
-            throw new RuntimeException("No CommunicationManager has been set yet - cannot get litematic state");
+            throw new RuntimeException("Es wurde noch kein CommunicationManager gesetzt - Litematic-Status kann nicht ermittelt werden");
         }
         return context.communicationManager.getDownloadState(placement);
     }
@@ -46,7 +46,7 @@ public class FileStorage {
         }
     }
 
-    // 为文字数据创建空文件的方法
+    // Methode zum Erstellen einer leeren Datei für Litematic-Daten
     public File createLocalLitematic(ServerPlacement placement) {
         if (getLocalState(placement).isLocalFileReady()) {
             throw new IllegalArgumentException("");
@@ -68,7 +68,7 @@ public class FileStorage {
         try {
             hash = SyncmaticaUtil.createChecksum(Files.newInputStream(localFile.toPath()));
         } catch (Exception e) {
-            // 可以安全地忽略，因为我们确定该文件已被找到
+            // Kann sicher ignoriert werden, da die Datei bereits gefunden wurde
             e.printStackTrace();
         }
         if (hash == null) {

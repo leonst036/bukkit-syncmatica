@@ -44,7 +44,7 @@ public class DownloadExchange extends Exchange {
     }
 
     public void handle(Identifier id, PacketByteBuf packetBuf) {
-        packetBuf.readUuid(); // 跳过UUID
+        packetBuf.readUuid(); // UUID überspringen
         if (id.equals(PacketType.SEND_LITEMATIC.identifier)) {
             int size = packetBuf.readInt();
             bytesSent += size;
@@ -80,7 +80,7 @@ public class DownloadExchange extends Exchange {
             if (downloadHash.equals(toDownload.getHash())) {
                 succeed();
             } else {
-                // no need to notify partner since exchange is closed on partner side
+                // Partner muss nicht benachrichtigt werden, da der Austausch dort bereits geschlossen ist
                 close(false);
             }
             return;

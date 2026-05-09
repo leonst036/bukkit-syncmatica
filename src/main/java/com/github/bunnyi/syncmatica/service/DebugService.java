@@ -10,14 +10,14 @@ public class DebugService extends AbstractService {
 
     public void logReceivePacket(Identifier packageType) {
         if (doPacketLogging) {
-            LogManager.getLogger(SyncmaticaPlugin.class).info("Syncmatica - received packet:[type={}]", packageType);
+            LogManager.getLogger(SyncmaticaPlugin.class).info("Syncmatica - Paket empfangen:[Typ={}]", packageType);
         }
     }
 
     public void logSendPacket(Identifier packetType, String targetIdentifier) {
         if (doPacketLogging) {
             LogManager.getLogger(SyncmaticaPlugin.class).info(
-                    "Sending packet[type={}] to ExchangeTarget[id={}]",
+                    "Sende Paket[Typ={}] an ExchangeTarget[ID={}]",
                     packetType,
                     targetIdentifier
             );

@@ -49,7 +49,7 @@ public final class SyncmaticaPlugin extends JavaPlugin implements Listener, TabE
 
     @EventHandler
     public void onPlayerRegisterChannelEvent(PlayerRegisterChannelEvent event) {
-        // Bukkit.getLogger().info(String.format("[%s] [注册通道事件]：%s", event.getPlayer().getName(), event.getChannel()));
+        // Bukkit.getLogger().info(String.format("[%s] [Kanal-Registrierungsereignis]: %s", event.getPlayer().getName(), event.getChannel()));
         if (event.getChannel().equals(PacketType.REGISTER_VERSION.toString())) {
             context.communicationManager.onPlayerJoin(getExchangeTarget(event.getPlayer()), event.getPlayer());
         }
@@ -70,7 +70,7 @@ public final class SyncmaticaPlugin extends JavaPlugin implements Listener, TabE
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] bytes) {
-        // Bukkit.getLogger().info(String.format("[接收] [%s] [%s] %s", channel, player.getName(), StringTools.getHexString(bytes)));
+        // Bukkit.getLogger().info(String.format("[Empfangen] [%s] [%s] %s", channel, player.getName(), StringTools.getHexString(bytes)));
         PacketByteBuf packetByteBuf = new PacketByteBuf(bytes);
         Identifier id = new Identifier(channel);
         if (PacketType.containsIdentifier(id)) {

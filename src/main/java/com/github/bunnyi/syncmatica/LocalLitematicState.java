@@ -1,13 +1,13 @@
 package com.github.bunnyi.syncmatica;
 
 /**
- * 本地投影状态
+ * Zustand der lokalen Litematic
  */
 public enum LocalLitematicState {
-    NO_LOCAL_LITEMATIC(true, false),            // 没有本地原理图
-    LOCAL_LITEMATIC_DESYNC(true, false),        // 本地原理图不同步
-    DOWNLOADING_LITEMATIC(false, false),        // 正在下载原理图
-    LOCAL_LITEMATIC_PRESENT(false, true);       // 本地原理图存在
+    NO_LOCAL_LITEMATIC(true, false),            // Keine lokale Litematic vorhanden
+    LOCAL_LITEMATIC_DESYNC(true, false),        // Lokale Litematic ist nicht synchron
+    DOWNLOADING_LITEMATIC(false, false),        // Litematic wird heruntergeladen
+    LOCAL_LITEMATIC_PRESENT(false, true);       // Lokale Litematic ist vorhanden
 
     private final boolean downloadReady;
     private final boolean fileReady;

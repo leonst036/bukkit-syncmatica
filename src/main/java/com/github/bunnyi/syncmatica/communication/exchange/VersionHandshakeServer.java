@@ -30,7 +30,7 @@ public class VersionHandshakeServer extends FeatureExchange {
         if (id.equals(PacketType.REGISTER_VERSION.identifier)) {
             partnerVersion = packetBuf.readString(32767);
             if (!context.checkPartnerVersion(partnerVersion)) {
-                LogManager.getLogger(VersionHandshakeServer.class).info("Denying syncmatica join due to outdated client with local version {} and client version {}", SyncmaticaPlugin.VERSION, partnerVersion);
+                LogManager.getLogger(VersionHandshakeServer.class).info("Syncmatica-Beitritt abgelehnt: veralteter Client (lokale Version {}, Client-Version {})", SyncmaticaPlugin.VERSION, partnerVersion);
                 close(false);
                 return;
             }
@@ -48,7 +48,7 @@ public class VersionHandshakeServer extends FeatureExchange {
 
     @Override
     public void onFeatureSetReceive() {
-        LogManager.getLogger(VersionHandshakeServer.class).info("Syncmatica client joining with local version {} and client version {}", SyncmaticaPlugin.VERSION, partnerVersion);
+        LogManager.getLogger(VersionHandshakeServer.class).info("Syncmatica-Client verbindet sich mit lokaler Version {} und Client-Version {}", SyncmaticaPlugin.VERSION, partnerVersion);
         PacketByteBuf newBuf = new PacketByteBuf();
         Collection<ServerPlacement> collection = context.syncmaticaManager.getAll();
         newBuf.writeInt(collection.size());

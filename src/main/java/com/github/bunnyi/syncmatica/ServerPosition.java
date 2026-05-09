@@ -6,8 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 public class ServerPosition {
-    private final BlockPos position;    // 原理图所在位置
-    private final String dimensionId;   // 原理图所在维度
+    private final BlockPos position;    // Position der Litematic
+    private final String dimensionId;   // Dimension der Litematic
 
     public ServerPosition(final BlockPos pos, final String dim) {
         position = pos;
