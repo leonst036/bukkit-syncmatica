@@ -26,7 +26,7 @@ public class ModifyExchangeServer extends Exchange {
     }
 
     public void handle(Identifier id, PacketByteBuf packetBuf) {
-        packetBuf.readUuid(); // 跳过UUID
+        packetBuf.readUuid(); // UUID überspringen
         if (id.equals(PacketType.MODIFY_FINISH.identifier)) {
             context.communicationManager.receivePositionData(placement, packetBuf, partner);
             PlayerIdentifier identifier = context.playerIdentifierProvider.createOrGet(partner);
@@ -38,7 +38,7 @@ public class ModifyExchangeServer extends Exchange {
 
     public void init() {
         if (getPlacement() == null || context.communicationManager.getModifier(placement) != null) {
-            close(true); // 相当于拒绝
+            close(true); // Entspricht einer Ablehnung
         } else {
             accept();
         }

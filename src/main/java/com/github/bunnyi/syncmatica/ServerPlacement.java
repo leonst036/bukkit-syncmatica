@@ -15,16 +15,16 @@ import java.nio.file.Files;
 import java.util.UUID;
 
 public class ServerPlacement {
-    private final UUID id;                                      // 对象标识
-    private final String fileName;                              // 原理图文件名称
-    private final UUID hashValue;                               // 原理图文件哈希值UUID
-    private PlayerIdentifier owner;                             // 分享它的玩家
-    private PlayerIdentifier lastModifiedBy;                    // 上次修改的玩家
-    private ServerPosition origin;                              // 原理图在服务器放置的位置
-    private BlockRotation rotation;                             // 原理图旋转
-    private BlockMirror mirror;                                 // 原理图镜像
-    private SubRegionData subRegionData = new SubRegionData();  // 子区域数据
-    private SyncmaticaMaterialList matList;                     // 材料列表
+    private final UUID id;                                      // Objekt-ID
+    private final String fileName;                              // Name der Litematic-Datei
+    private final UUID hashValue;                               // UUID des Litematic-Hashes
+    private PlayerIdentifier owner;                             // Teilender Spieler
+    private PlayerIdentifier lastModifiedBy;                    // Zuletzt ändernder Spieler
+    private ServerPosition origin;                              // Position der Litematic auf dem Server
+    private BlockRotation rotation;                             // Rotation der Litematic
+    private BlockMirror mirror;                                 // Spiegelung der Litematic
+    private SubRegionData subRegionData = new SubRegionData();  // Daten der Unterbereiche
+    private SyncmaticaMaterialList matList;                     // Materialliste
 
     public ServerPlacement(UUID id, String fileName, UUID hashValue, PlayerIdentifier owner) {
         this.id = id;

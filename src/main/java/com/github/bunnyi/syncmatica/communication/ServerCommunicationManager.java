@@ -150,8 +150,8 @@ public class ServerCommunicationManager {
 
     public void download(ServerPlacement syncmatic, ExchangeTarget source) throws NoSuchAlgorithmException, IOException {
         if (!context.fileStorage.getLocalState(syncmatic).isReadyForDownload()) {
-            // forgot a negation here
-            throw new IllegalArgumentException(syncmatic.toString() + " is not ready for download local state is: " + context.fileStorage.getLocalState(syncmatic).toString());
+            // Hier fehlte zuvor eine Negation
+            throw new IllegalArgumentException(syncmatic.toString() + " ist nicht zum Download bereit; lokaler Status ist: " + context.fileStorage.getLocalState(syncmatic).toString());
         }
         File toDownload = context.fileStorage.createLocalLitematic(syncmatic);
         Exchange downloadExchange = new DownloadExchange(syncmatic, toDownload, source, context);
@@ -177,7 +177,7 @@ public class ServerCommunicationManager {
 
     public void startExchange(Exchange newExchange) {
         if (!broadcastTargets.contains(newExchange.partner)) {
-            throw new IllegalArgumentException(newExchange.partner.toString() + " is not a valid ExchangeTarget");
+            throw new IllegalArgumentException(newExchange.partner.toString() + " ist kein gültiges ExchangeTarget");
         }
         startExchangeUnchecked(newExchange);
     }
@@ -241,7 +241,7 @@ public class ServerCommunicationManager {
                 cancelShare(source, placement);
                 return;
             }
-            // 当客户端不与所有者通信时
+            // Falls der Client nicht mit den Eigentümerdaten kommuniziert
             PlayerProfile profile = playerMap.get(source).getPlayerProfile();
             PlayerIdentifier playerIdentifier = context.playerIdentifierProvider.createOrGet(profile);
             if (!placement.getOwner().equals(playerIdentifier)) {
@@ -249,7 +249,7 @@ public class ServerCommunicationManager {
                 placement.setLastModifiedBy(playerIdentifier);
             }
             if (!context.fileStorage.getLocalState(placement).isLocalFileReady()) {
-                // 特殊的边缘情况，因为文件存储是通过放置而不是文件名/哈希来传输的
+                // Spezieller Randfall, da der Dateispeicher über Platzierung statt Dateiname/Hash übertragen wird
                 if (context.fileStorage.getLocalState(placement) == LocalLitematicState.DOWNLOADING_LITEMATIC) {
                     downloadingFile.computeIfAbsent(placement.getHash(), key -> new ArrayList<>()).add(placement);
                     return;
@@ -319,7 +319,7 @@ public class ServerCommunicationManager {
             ServerPlacement placement = ((ModifyExchangeServer) exchange).getPlacement();
             for (ExchangeTarget client : broadcastTargets) {
                 if (client.getFeatureSet().hasFeature(Feature.MODIFY)) {
-                    // 客户端支持修改，所以只发送修改
+                    // Client unterstützt Änderungen, daher nur die Änderungen senden
                     PacketByteBuf buf = new PacketByteBuf();
                     buf.writeUuid(placement.getId());
                     putPositionData(placement, buf, client);
@@ -329,7 +329,7 @@ public class ServerCommunicationManager {
                     }
                     client.sendPacket(PacketType.MODIFY.identifier, buf, context);
                 } else {
-                    // 客户端不支持修改，所以发送数据，然后
+                    // Client unterstützt Änderungen nicht, daher neu senden
                     PacketByteBuf buf = new PacketByteBuf();
                     buf.writeUuid(placement.getId());
                     client.sendPacket(PacketType.REMOVE_SYNCMATIC.identifier, buf, context);

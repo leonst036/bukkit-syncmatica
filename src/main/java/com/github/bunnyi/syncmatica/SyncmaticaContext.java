@@ -15,15 +15,15 @@ import java.io.*;
 import java.util.Arrays;
 
 /**
- * 同步投影上下文
+ * Syncmatica-Kontext
  */
 public class SyncmaticaContext {
-    public final File configFolder;                                 // 配置文件夹
-    public final File configFile;                                   // 配置文件
-    public final File litematicFolder;                              // 投影配置文件夹
-    public final FileStorage fileStorage;                           // 文件存储对象
-    public final ServerCommunicationManager communicationManager;   // 服务器通信管理器
-    public final SyncmaticaManager syncmaticaManager;               // 同步管理器
+    public final File configFolder;                                 // Konfigurationsordner
+    public final File configFile;                                   // Konfigurationsdatei
+    public final File litematicFolder;                              // Litematic-Ordner
+    public final FileStorage fileStorage;                           // Dateispeicher
+    public final ServerCommunicationManager communicationManager;   // Server-Kommunikationsmanager
+    public final SyncmaticaManager syncmaticaManager;               // Syncmatica-Manager
     public final QuotaService quotaService;
     public final DebugService debugService;
     public final PlayerIdentifierProvider playerIdentifierProvider;

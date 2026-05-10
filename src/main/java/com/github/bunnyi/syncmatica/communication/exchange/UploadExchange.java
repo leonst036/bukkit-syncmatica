@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-// uploading part of transmit data exchange
-// pairs with Download Exchange
+// Upload-Teil des Datenaustausch-Protokolls
+// Gehört zum DownloadExchange
 
 public class UploadExchange extends Exchange {
-    // CustomPayloadPackets的最大缓冲区大小实际上是32767
-    // 因此32768是一个错误的发送值，因此将其调整为16384，正好减半
+    // Die maximale Puffergröße für CustomPayloadPackets beträgt effektiv 32767
+    // 32768 ist daher ungültig; 16384 ist die sichere Hälfte
     private static final int BUFFER_SIZE = 16384;
 
     private final ServerPlacement toUpload;
@@ -53,7 +53,7 @@ public class UploadExchange extends Exchange {
     }
 
     private void send() {
-        // 尝试传输空文件时可能会失败
+        // Kann fehlschlagen, wenn eine leere Datei übertragen wird
         int bytesRead = -1;
         try {
             if (inputStream != null) {
